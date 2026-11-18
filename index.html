@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Skybound</title>
 <meta name="theme-color" content="#ffffff">
+<meta name="description" content="Skybound turns coach feedback into goals. Set goals. Achieve more.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Skybound">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<script>
+/* Catch the browser's install offer early (it can fire before the app script runs). */
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();window.__sbInstallEvt=e;});
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
@@ -169,6 +182,37 @@ body.dark .welcome-visual:before{background:#12384d;box-shadow:0 24px 44px -30px
 .setup-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.setup-grid.compact{grid-template-columns:repeat(4,minmax(0,1fr))}.setup-choice{display:grid;gap:5px;min-height:108px;padding:13px 10px;text-align:left;border:2px solid var(--line);border-bottom-width:4px;border-radius:18px;background:var(--card);color:var(--ink);transition:transform .16s var(--ease),border-color .16s,background .16s,box-shadow .16s}.setup-choice:hover{transform:translateY(-2px);border-color:#8fcff0;box-shadow:0 12px 22px -18px #16456e88}.setup-choice.on{border-color:var(--sky);background:#e9f8ff;box-shadow:0 0 0 3px #1cb0f61a}.setup-choice strong{font-size:27px;color:var(--sky-deep)}.setup-choice b{font-size:14px}.setup-choice small{color:var(--soft-ink);font-size:11px;line-height:1.3;font-weight:700}.setup-icon{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:var(--sky-wash);color:var(--sky-deep);font-size:20px;font-weight:900}.setup-summary{gap:0}.summary-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.summary-row:last-child{border-bottom:0}.summary-row>div{display:grid;gap:1px}.summary-row small{color:var(--soft-ink);font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.summary-row b{font-size:15px}@media(max-width:680px){.setup-grid,.setup-grid.compact{grid-template-columns:repeat(2,minmax(0,1fr))}.setup-choice{min-height:98px}.setup-summary{grid-template-columns:1fr}}
 .practice-row{display:flex;align-items:center;gap:10px;margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--sky-wash)}.practice-row .check{flex:0 0 auto}.practice-row small{display:block;color:var(--soft-ink);font-weight:800;font-size:11px}
 .large-text{font-size:1.08em}.high-contrast{--muted:#36546b}.reduced-motion *, .reduced-motion *::before, .reduced-motion *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
+</style>
+<style id="sb-install-css">
+/* install sheet + settings card */
+body.sbi-open{overflow:hidden}
+.sbi{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+.sbi-back{position:absolute;inset:0;background:#0f2a4a73;opacity:0;transition:opacity .2s}
+.sbi-card{position:relative;width:100%;max-width:520px;max-height:100%;overflow:auto;background:var(--card);color:var(--navy);border:2px solid var(--mist);border-bottom:0;border-radius:28px 28px 0 0;padding:0 22px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -12px 40px #0f2a4a40;transform:translateY(40px);opacity:0;transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s;text-align:center}
+.sbi.in{pointer-events:auto}.sbi.in .sbi-back{opacity:1}.sbi.in .sbi-card{transform:none;opacity:1}
+.sbi-top{margin:0 -22px 12px;padding:20px 0 6px;background:linear-gradient(180deg,#d6efff,#b9e2ff);border-radius:26px 26px 0 0}
+body.dark .sbi-top{background:linear-gradient(180deg,#183a52,#12293b)}
+.sbi-mascot{display:block;width:150px;height:auto;max-height:130px;object-fit:contain;margin:0 auto;animation:bob 3.2s ease-in-out infinite}
+.sbi h2{margin:0 0 6px;font-size:27px;line-height:1.1;font-weight:900}
+.sbi-lead{margin:0 auto 14px;max-width:34ch;color:var(--muted);font-weight:700;line-height:1.45}
+.sbi-perks{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:8px;text-align:left}
+.sbi-perks li{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px}
+.sbi-perks i{flex:none;width:24px;height:24px;border-radius:50%;background:var(--mint);display:grid;place-items:center}
+.sbi-perks svg{width:14px;height:14px}
+.sbi-big{width:100%;min-height:64px;display:flex;align-items:center;justify-content:center;gap:12px;border:0;border-bottom:6px solid var(--deep);border-radius:20px;background:var(--sky);color:#fff;font-weight:900;font-size:19px;letter-spacing:.05em;text-transform:uppercase;text-shadow:0 1px 0 #0002;cursor:pointer;transition:transform .12s,border-bottom-width .12s,filter .15s}
+.sbi-big:hover{filter:brightness(1.05)}.sbi-big:active{transform:translateY(4px);border-bottom-width:2px}
+.sbi-big svg,.sbi-btn svg{width:24px;height:24px;flex:none}
+.sbi-help{margin:14px 0 0;padding:12px 14px;border:2px solid var(--mist);border-radius:16px;background:var(--cloud);text-align:left;font-weight:700;font-size:14px;line-height:1.5}
+.sbi-help[hidden]{display:none}.sbi-help ol{margin:0 0 8px;padding-left:20px}.sbi-help p{margin:0;color:var(--muted)}
+.sbi-help svg{width:16px;height:16px;vertical-align:-3px}
+.sbi-later{margin:8px 0 0;min-height:44px;width:100%;border:0;background:transparent;color:var(--muted);font-weight:900;font-size:15px;border-radius:14px;cursor:pointer}
+.sbi-later:hover{background:var(--cloud)}
+.sbi-foot{margin:2px 0 0;font-size:12.5px;font-weight:700;color:var(--muted)}
+.sbi button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+@media(min-width:600px){.sbi{align-items:center;padding:24px}.sbi-card{border-bottom:2px solid var(--mist);border-radius:28px;padding-bottom:22px}.sbi-top{border-radius:26px 26px 0 0}}
+.sbi-set .sbi-btn{margin-top:12px;min-height:58px;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px}
+.sbi-set .sbi-help{margin-top:12px}
+@media(prefers-reduced-motion:reduce){.sbi *,.sbi{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -415,6 +459,79 @@ function enhanceAssets(){const root=document.getElementById('app');if(!root)retu
  const submitBeforeV10=submit;submit=function(e){if(e.target&&e.target.dataset.form==='goal'){e.preventDefault();captureGoalPracticeTimesV10();const d=fd(e.target),a=act(),ds=ui.goalPracticeDays===undefined?[2,4]:ui.goalPracticeDays,times=goalPracticeTimesV10();if(a){S.goals.push({id:uid('goal'),activityId:a.id,title:d.title.trim(),priority:d.priority,practiceDays:ds.length,practiceOnDays:ds,practiceTimes:times,practiceTime:ds.length?times[ds[0]]||'17:00':'',practiceDates:[],nextAction:'',successDefinition:'',isInCurrentAim:!!d.aim,completedAt:null,retiredAt:null,feedbackId:null,steps:[],timeline:[{timestamp:Date.now(),description:'Goal created'}],createdAt:Date.now(),isExample:false});ui.goalPracticeDays=undefined;ui.goalPracticeTimes=undefined;ui.modal=null;mutate(()=>{},'Goal saved')}return}submitBeforeV10(e)};
  const homeBeforeV11=home;home=function(){let s=homeBeforeV11();if(!act())return s;const day=new Date().getDay(),k=today(),sessions=list('sessions').filter(x=>x.weekly?dob(x.dateKey).getDay()===day:x.dateKey===k),scheduledGoals=goals().filter(g=>!g.completedAt&&(g.practiceDays===0||(Array.isArray(g.practiceOnDays)&&g.practiceOnDays.includes(day)))),cards=[];if(sessions.length){sessions.forEach(session=>{const done=(session.completedDates||[]).includes(k),goalsForSession=scheduledGoals.map(g=>{const checked=(g.practiceDates||[]).includes(k),time=(g.practiceTimes||{})[day]||g.practiceTime||'',action=g.practiceDays===0?'session-goal-done':'goal-practice';return '<div class="event"><div class="row"><div class="grow"><b>'+esc(g.title)+'</b><div class="muted small">'+(g.practiceDays===0?'Goal to complete in this session':'Goal practice today'+(time?' · '+esc(time):''))+'</div></div><button class="check '+(checked?'done':'')+'" data-action="'+action+'" data-id="'+g.id+'">'+(checked?'✓':'')+'</button></div></div>'}).join('');cards.push('<div class="event"><div class="row"><div class="grow"><b>'+esc(session.title)+'</b><div class="muted small">Session'+(session.time?' · '+esc(session.time):'')+'</div></div><button class="check '+(done?'done':'')+'" data-action="session-done" data-id="'+session.id+'" data-date="'+k+'">'+(done?'✓':'')+'</button></div></div>'+(goalsForSession||'<p class="muted small" style="margin:8px 0 0">No goals scheduled for this session yet.</p>'))})}else{return s}const todayCard='<section class="card"><h2>Today’s step</h2><p class="muted small">Complete these goals in today’s session.</p>'+cards.join('')+'</section>';s=s.replace(/<section class="card"><h2>Today’s step<\/h2>[\s\S]*?<\/section>/,'');const marker='<section class="card"><div class="row"><h2 class="grow">Current Aim</h2>';return s.replace(marker,todayCard+marker)};
  loadExample=function(){const oldIds=new Set(S.activities.filter(a=>a.isExample).map(a=>a.id));if(oldIds.size){S.activities=S.activities.filter(a=>!a.isExample);['goals','feedback','sessions','habits','records'].forEach(k=>S[k]=S[k].filter(x=>!oldIds.has(x.activityId)))}const a={id:uid('act'),name:'Football',icon:'ball',color:'#4A90E2',isExample:true};S.activities.push(a);S.currentActivityId=a.id;const now=Date.now(),dribble={id:uid('goal'),activityId:a.id,title:'Improve dribbling',priority:'H',nextAction:'Complete 15 minutes of close-control dribbling',successDefinition:'I can change direction while keeping the ball close.',isInCurrentAim:true,completedAt:null,retiredAt:null,feedbackId:null,steps:[{title:'Choose a change-of-direction drill',done:true},{title:'Practise both feet',done:false}],timeline:[{timestamp:now,description:'Example goal created'}],createdAt:now,isExample:true,practiceDays:2,practiceOnDays:[1,2],practiceTimes:{1:'17:00',2:'18:00'},practiceTime:'17:00',practiceDates:[]},sprints={id:uid('goal'),activityId:a.id,title:'Build sprint speed',priority:'H',nextAction:'Run six short sprints with full recovery',successDefinition:'My first steps feel sharper and I keep good form.',isInCurrentAim:true,completedAt:null,retiredAt:null,feedbackId:null,steps:[],timeline:[{timestamp:now,description:'Example goal created'}],createdAt:now,isExample:true,practiceDays:1,practiceOnDays:[5],practiceTimes:{5:'17:30'},practiceTime:'17:30',practiceDates:[]},pressure={id:uid('goal'),activityId:a.id,title:'Stay calm under pressure',priority:'M',nextAction:'Use one slow breath before receiving',successDefinition:'I reset instead of rushing.',isInCurrentAim:true,completedAt:null,retiredAt:null,feedbackId:null,steps:[],timeline:[{timestamp:now,description:'Example session-only goal created'}],createdAt:now,isExample:true,practiceDays:0,practiceOnDays:[],practiceTimes:{},practiceTime:'',practiceDates:[]};S.goals.push(dribble,sprints,pressure);S.sessions.push({id:uid('ses'),activityId:a.id,title:'Dribbling technique',type:'Practice',dateKey:nextSessionDate(2),time:'18:00',weekly:true,goalIds:[dribble.id],completedDates:[],createdAt:now,isExample:true},{id:uid('ses'),activityId:a.id,title:'Running training',type:'Training',dateKey:nextSessionDate(5),time:'17:30',weekly:true,goalIds:[sprints.id],completedDates:[],createdAt:now,isExample:true});S.habits.push({id:uid('hab'),activityId:a.id,title:'Ball touches',targetDays:2,practiceOnDays:[1,3],practiceTimes:{1:'17:00',3:'17:00'},linkedGoalId:dribble.id,loggedDates:[],createdAt:now,isExample:true},{id:uid('hab'),activityId:a.id,title:'Mobility reset',targetDays:2,practiceOnDays:[4,5],practiceTimes:{4:'19:00',5:'19:00'},linkedGoalId:sprints.id,loggedDates:[],createdAt:now,isExample:true});S.feedback.push({id:uid('fb'),activityId:a.id,coachName:'Coach Maya',note:'Keep your first touch soft, take one breath before receiving, and attack space with sharper first steps.',createdAt:now,isExample:true});S.settings.weeklyTarget=4;save();render();toast('Updated example activity loaded')};
+ /* ===== Skybound: install as an app + offline support ===== */
+ const SBI_SEEN='skybound.install.seen.v1';
+ const SB_DL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 10.5l5 5 5-5"/><path d="M4 20h16"/></svg>';
+ const SB_SHARE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M8 7l4-4 4 4"/><path d="M6 11H5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1h-1"/></svg>';
+ const SB_TICK='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+ function sbStandalone(){try{return matchMedia('(display-mode: standalone)').matches||matchMedia('(display-mode: fullscreen)').matches||matchMedia('(display-mode: minimal-ui)').matches||navigator.standalone===true}catch(e){return false}}
+ function sbIOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
+ let sbInstalled=sbStandalone();
+ function sbHelpHTML(){
+  if(!window.isSecureContext)return '<b>Installing needs a secure address.</b> Once Skybound is hosted on https (for example GitHub Pages), this button installs it.';
+  if(sbIOS())return '<ol><li>Tap the <b>Share</b> button '+SB_SHARE+' in your browser.</li><li>Choose <b>Add to Home Screen</b>.</li><li>Tap <b>Add</b>.</li></ol><p>On iPhone and iPad the home-screen app keeps its own storage. Download a backup in Settings first, then restore it inside the app to bring your goals across.</p>';
+  return '<ol><li>Open your browser menu.</li><li>Choose <b>Install Skybound</b> or <b>Add to Home screen</b>.</li></ol>';
+ }
+ function sbSheetHTML(){
+  const perk=t=>'<li><i>'+SB_TICK+'</i>'+t+'</li>';
+  return '<div class="sbi-back" data-sbi="later"></div><section class="sbi-card" role="dialog" aria-modal="true" aria-labelledby="sbi-title">'
+   +'<div class="sbi-top"><img class="sbi-mascot" src="assets/mascot_pose_celebrating.png" alt=""></div>'
+   +'<h2 id="sbi-title">Get the Skybound app</h2>'
+   +'<p class="sbi-lead">Your goals are set up. Add Skybound to your home screen to keep them one tap away.</p>'
+   +'<ul class="sbi-perks">'+perk('Opens full screen, like any other app')+perk('Works without Wi-Fi')+perk('Your goals stay on this device')+'</ul>'
+   +'<button class="sbi-big" type="button" data-sbi="install">'+SB_DL+'<span>Download Skybound</span></button>'
+   +'<div class="sbi-help" id="sbi-help" hidden></div>'
+   +'<button class="sbi-later" type="button" data-sbi="later">Maybe later</button>'
+   +'<p class="sbi-foot">No app store needed. You can also install from Settings.</p></section>';
+ }
+ function sbShowHelp(){const h=document.getElementById('sbi-help');if(h){h.innerHTML=sbHelpHTML();h.hidden=false}}
+ function sbCloseSheet(){const w=document.getElementById('sbi');if(!w)return;w.classList.remove('in');document.body.classList.remove('sbi-open');document.removeEventListener('keydown',sbKey);setTimeout(()=>w.remove(),260)}
+ function sbKey(e){if(e.key==='Escape')sbCloseSheet()}
+ function sbOpenSheet(withHelp){
+  if(document.getElementById('sbi')){if(withHelp)sbShowHelp();return}
+  const w=document.createElement('div');w.id='sbi';w.className='sbi';w.innerHTML=sbSheetHTML();
+  w.addEventListener('click',e=>{const b=e.target.closest('[data-sbi]');if(!b)return;if(b.dataset.sbi==='later')sbCloseSheet();else if(b.dataset.sbi==='install')sbInstall()});
+  document.body.appendChild(w);document.body.classList.add('sbi-open');document.addEventListener('keydown',sbKey);
+  if(withHelp)sbShowHelp();
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{w.classList.add('in');const b=w.querySelector('.sbi-big');if(b)b.focus({preventScroll:true})}));
+ }
+ async function sbInstall(){
+  const ev=window.__sbInstallEvt;
+  if(ev){
+   try{ev.prompt();const r=await ev.userChoice;window.__sbInstallEvt=null;if(r&&r.outcome==='accepted')sbCloseSheet()}
+   catch(e){window.__sbInstallEvt=null;sbOpenSheet(true)}
+   return;
+  }
+  sbOpenSheet(true);
+ }
+ function sbAfterOnboarding(){
+  if(sbInstalled||sbStandalone()||!window.isSecureContext)return;
+  try{if(localStorage.getItem(SBI_SEEN))return;localStorage.setItem(SBI_SEEN,'1')}catch(e){}
+  setTimeout(()=>sbOpenSheet(false),700);
+ }
+ function sbSettingsCard(){
+  if(sbInstalled||sbStandalone())return '<div class="section-label">APP</div><section class="card sbi-set"><div class="row"><img class="mascot sm" src="assets/mascot_pose_happy.png" alt=""><div class="grow"><h3>Skybound is installed</h3><p class="muted small">You are using the app on this device. It works offline.</p></div></div></section>';
+  return '<div class="section-label">GET THE APP</div><section class="card sbi-set"><div class="row"><img class="mascot sm" src="assets/mascot_pose_celebrating.png" alt=""><div class="grow"><h3>Download Skybound</h3><p class="muted small">Add it to your home screen. It opens full screen and works offline.</p></div></div><button class="btn full sbi-btn" type="button" data-action="install-app">'+SB_DL+'<span>Download app</span></button></section>';
+ }
+ const moreViewBeforeInstall=moreView;
+ moreView=function(){const s=moreViewBeforeInstall(),m='<main class="main">',i=s.indexOf(m);return i<0?s:s.slice(0,i+m.length)+sbSettingsCard()+s.slice(i+m.length)};
+ const clickBeforeInstall=click;
+ click=function(e){
+  const x=e.target.closest&&e.target.closest('[data-action]');
+  if(x&&x.dataset.action==='install-app'){sbInstall();return}
+  const was=!act()||ui.page==='onboarding';
+  clickBeforeInstall(e);
+  if(was&&act()&&ui.page!=='onboarding')sbAfterOnboarding();
+ };
+ window.addEventListener('appinstalled',()=>{sbInstalled=true;window.__sbInstallEvt=null;sbCloseSheet();toast('Skybound installed. Find it on your home screen.')});
+ try{matchMedia('(display-mode: standalone)').addEventListener('change',e=>{if(e.matches)sbInstalled=true})}catch(e){}
+ if('serviceWorker' in navigator&&window.isSecureContext){
+  window.addEventListener('load',()=>{
+   navigator.serviceWorker.register('sw.js',{scope:'./'}).then(reg=>{
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)reg.update().catch(()=>{})});
+   }).catch(()=>{});
+  });
+ }
  render();
 })();
 </script>
